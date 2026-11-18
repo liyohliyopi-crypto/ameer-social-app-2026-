@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="kn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMEER SOCIAL</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<!-- LOGIN CODE START -->
+
+<div class="login-box">
+  <h2>🔐 AMEER SOCIAL</h2>
+  <h3>Login</h3>
+  <input type="text" id="username" placeholder="ನಿಮ್ಮ ಹೆಸರು">
+
+  <input type="password" id="password" placeholder="Password">
+
+  <button onclick="loginUser()">Login</button>
+
+  <p>ಹೊಸ ಖಾತೆ ಬೇಕೇ? Signup ಮಾಡಿ ❤️</p>
+</div>
+
+<!-- LOGIN CODE END -->
+<!-- SIGNUP START -->
+
+<div class="login-box">
+  <h2>❤️ Create New Account</h2>
+  <input
+    type="text"
+    id="newName"
+    placeholder="ನಿಮ್ಮ ಹೆಸರು"
+  >
+
+  <br><br>
+
+  <input
+    type="email"
+    id="newEmail"
+    placeholder="ನಿಮ್ಮ Email"
+  >
+
+  <br><br>
+
+  <input
+    type="password"
+    id="newPassword"
+    placeholder="ಹೊಸ Password"
+  >
+  <br><br>
+  <button onclick="signupUser()">
+    📝 Create Account
+  </button>
+
+  <p id="signupResult"></p>
+</div>
+<!-- SIGNUP END -->
+
+<!-- MY PROFILE START -->
+
+<div class="login-box" style="text-align:center; padding:20px;">
+<input
+  type="text"
+  id="newProfileName"
+  placeholder="ಹೊಸ ಹೆಸರು ಬರೆಯಿರಿ"
+>
+
+<button onclick="changeProfileName()">
+  ✏️ Change Name
+</button>
+<div style="font-size:70px;">👨</div>
+
+<h2 id="profileName">AMEER</h2>
+<h3>👥 My Friends</h3>
+<div id="myFriends">
+  <p>👤 RAHUL
+    <button onclick="removeFriend('RAHUL')">❌ Remove</button>
+  </p>
+
+  <p>👤 KIRAN
+    <button onclick="removeFriend('KIRAN')">❌ Remove</button>
+  </p>
+
+  <p>👤 ARUN
+    <button onclick="removeFriend('ARUN')">❌ Remove</button>
+  </p>
+</div>
+<h3>👥 Followers: <span id="followerCount">0</span></h3>
+
+<button onclick="followUser(this)">
+  ➕ Follow
+</button>
+<button onclick="editProfile()">✏️ Edit Profile</button>
+<button onclick="logoutUser()">🚪 Logout</button>
+<p>Welcome to my profile ❤️</p>
+  <p>📸 0 Posts | 👥 0 Friends | ❤️ 0 Likes</p>
+
+  <input
+    type="file"
+    id="profilePhoto"
+    accept="image/*"
+  >
+
+  <p>
+    <textarea
+      id="bio"
+      placeholder="ನಿಮ್ಮ Bio ಬರೆಯಿರಿ..."
+    ></textarea>
+  </p>
+
+  <button onclick="saveProfile()">
+    ✏️ Save Profile
+  </button>
+
+  <p id="profileResult"></p>
+
+</div>
+
+<!-- MY PROFILE END -->
+<!-- FRIENDS SYSTEM START -->
+
+<div class="login-box" style="padding:20px;">
+
+<h2>👥 Find Friends</h
+<h3>📩 Friend Requests</h3>
+
+<div id="friendRequests">
+  <p>👤 RAHUL
+    <button onclick="acceptRequest(this)">✓ Accept</button>
+    <button onclick="rejectRequest(this)">❌ Reject</button>
+  </p>
+
+  <p>👤 KIRAN
+    <button onclick="acceptRequest(this)">✓ Accept</button>
+    <button onclick="rejectRequest(this)">❌ Reject</button>
+  </p>
+</div>
+  <div class="post">
+    <h3>😊 Rahul</h3>
+    <p>Welcome to my friends list!</p>
+    <button onclick="addFriend(this)">
+      ➕ Add Friend
+    </button>
+  </div>
+
+  <div class="post">
+    <h3>😊 Arjun</h3>
+    <p>Let's connect!</p>
+    <button onclick="addFriend(this)">
+      ➕ Add Friend
+    </button>
+  </div>
+
+  <div class="post">
+    <h3>😊 Kiran</h3>
+    <p>Connect with me ❤️</p>
+    <button onclick="addFriend(this)">
+      ➕ Add Friend
+    </button>
+  </div>
+
+  <h3 id="friendCount">👥 Friends: 0</h3>
+
+</div>
+
+<!-- FRIENDS SYSTEM END -->
+
+<!-- FRIEND REQUESTS START -->
+
+<div class="login-box" style="padding:20px;">
+  <h2>📩 Friend Requests</h2>
+
+  <div class="post">
+    <h3>😊 Priya</h3>
+    <p>ನಿಮಗೆ Friend Request ಕಳುಹಿಸಿದ್ದಾರೆ ❤️</p>
+    <button onclick="acceptRequest(this)">
+      ✓ Accept Request
+    </button>
+  </div>
+
+  <div class="post">
+    <h3>😊 Ravi</h3>
+    <p>ನಿಮ್ಮ ಜೊತೆ ಸ್ನೇಹಿತರಾಗಲು ಬಯಸುತ್ತಾರೆ!</p>
+    <button onclick="acceptRequest(this)">
+      ✓ Accept Request
+    </button>
+  </div>
+</div>
+<!-- FRIEND REQUESTS END -->
+
+<!-- PRIVATE CHAT START -->
+
+<div class="login-box" style="padding:20px;">
+  <h2>💬 Private Chat</h2>
+
+  <h3>ನಿಮ್ಮ Friends</h3>
+
+  <button onclick="openChat('Rahul')">
+    😊 Rahul ಜೊತೆ Chat
+  </button>
+
+  <button onclick="openChat('Priya')">
+    😊 Priya ಜೊತೆ Chat
+  </button>
+
+  <button onclick="openChat('Ravi')">
+    😊 Ravi ಜೊತೆ Chat
+  </button>
+
+  <div class="post">
+    <h3 id="chatTitle">💬 Chat ತೆರೆಯಿರಿ</h3>
+
+    <div id="chatMessages">
+      <p>ಇಲ್ಲಿ ನಿಮ್ಮ Messages ಕಾಣಿಸುತ್ತವೆ.</p>
+    </div>
+
+    <input
+      type="text"
+      id="chatInput"
+      placeholder="Message ಬರೆಯಿರಿ..."
+    >
+
+    <button onclick="sendChat()">
+      📤 Send Message
+    </button>
+  </div>
+</div>
+
+<!-- PRIVATE CHAT END -->
+
+<header>
+  <h1>AMEER SOCIAL</h1>
+  <p>Connect with Friends ❤️</p>
+</header>
+<div class="stories">
+  <div>➕<br>ನಿಮ್ಮ Story</div>
+  <div>😊<br>Friends</div>
+  <div>🌟<br>Stories</div>
+</div>
+<main>
+  <h2>Home Feed</h2>
+  <h2>🔍 Search Friends</h2>
+<input
+  type="text"
+  id="searchFriend"
+  placeholder="ಸ್ನೇಹಿತರ ಹೆಸರು ಹುಡುಕಿ..."
+  oninput="searchFriends()"
+>
+<div id="searchResults"></div>
+  <button onclick="showNotifications()">
+  🔔 Notifications
+</button>
+
+<div id="notificationList"></div>
+  <button onclick="showSavedPosts()">⭐ Saved Posts</button>
+<div id="savedPostsList"></div>
+  <div class="post">
+  <h3>👤 <span id="feedName">AMEER</span></h3>
+    <p>Welcome to my Social Media App!</p>
+   
+<div class="upload-box">
+  <h3>📸 Create New Post</h3>
+
+  <input
+    type="file"
+    id="mediaFile"
+    accept="image/*,video/*"
+    onchange="showMedia()"
+  >
+
+  <div id="mediaPreview"></div>
+  <button onclick="publishPost()">📤 Share Post</button>
+</div>
+    <button onclick="likePost()">❤️ Like</button>
+    <button onclick="commentPost()">💬 Comment</button>
+    <p id="result">Likes: 0</p>
+    <div id="commentsList"></div>
+  </div>
+</main>
+<nav>
+  <button>🏠 Home</button>
+  <button>🔍 Search</button>
+  <button>➕ Post</button>
+  <button>👤 Profile</button>
+</nav>
+<script>
+let followers = Number(localStorage.getItem("followers")) || 0;
+
+document.getElementById("followerCount").innerText = followers;
+
+function followUser(button) {
+  if (button.innerText.includes("Follow")) {
+    followers++;
+    button.innerText = "✓ Following";
+  } else {
+    followers--;
+    button.innerText = "➕ Follow";
+  }
+
+  localStorage.setItem("followers", followers);
+  document.getElementById("followerCount").innerText = followers;
+}
+function searchFriends() {
+  const input = document.getElementById("searchFriend").value.toLowerCase();
+  const results = document.getElementById("searchResults");
+const friends = ["RAHUL", "KIRAN", "ARUN"];
+  const found = friends.filter(name =>
+    name.toLowerCase().includes(input)
+  );
+
+  results.innerHTML = found.map(name =>
+    `<p>👤 ${name}</p>`
+  ).join("");
+
+  if (found.length === 0) {
+    results.innerHTML = "<p>ಯಾರೂ ಸಿಗಲಿಲ್ಲ</p>";
+  }
+}
+function searchFriends() {
+  const input = document.getElementById("searchFriend").value.toLowerCase();
+  const results = document.getElementById("searchResults");
+
+  const friends = ["AMEER", "RAHUL", "KIRAN", "ARUN"];
+
+  const found = friends.filter(name =>
+    name.toLowerCase().includes(input)
+  );
+
+  results.innerHTML = found.map(name =>
+    `<p>👤 ${name}</p>`
+  ).join("");
+
+  if (found.length === 0) {
+    results.innerHTML = "<p>ಯಾರೂ ಸಿಗಲಿಲ್ಲ</p>";
+  }
+}
+function removeFriend(name) {
+  const confirmRemove = confirm(name + " ಅವರನ್ನು Friends List ನಿಂದ ತೆಗೆದುಹಾಕಬೇಕೇ?");
+
+  if (!confirmRemove) return;
+
+  const friendsDiv = document.getElementById("myFriends");
+
+  const friendItems = friendsDiv.querySelectorAll("p");
+
+  friendItems.forEach(item => {
+    if (item.innerText.includes(name)) {
+      item.remove();
+    }
+  });
+
+  alert(name + " ಅವರನ್ನು ತೆಗೆದುಹಾಕಲಾಗಿದೆ!");
+}
+function addFriend(button) {
+  if (button.disabled) return;
+  const post = button.closest(".post");
+  const name = post.querySelector("h3").innerText.replace("😊 ", "");
+
+  const requests = document.getElementById("friendRequests");
+
+  const item = document.createElement("p");
+  item.innerHTML = "👤 " + name +
+    ' <button onclick="acceptRequest(this)">✓ Accept</button>' +
+    ' <button onclick="rejectRequest(this)">❌ Reject</button>';
+
+  requests.appendChild(item);
+let savedRequests = JSON.parse(
+  localStorage.getItem("friendRequests") || "[]"
+);
+
+savedRequests.push(name);
+
+localStorage.setItem(
+  "friendRequests",
+  JSON.stringify(savedRequests)
+);
+  button.innerText = "✓ Request Sent";
+  button.disabled = true;
+}
+let acceptedFriends = Number(localStorage.getItem("acceptedFriends")) || 0;
+document.getElementById("friendCount").innerText =
+  "👥 Friends: " + acceptedFriends;
+function rejectRequest(button) {
+  if (button.disabled) return;
+
+  const item = button.closest("p");
+  const name = item.innerText.replace("👤 ", "").split("✓")[0].split("❌")[0].trim();
+
+  if (!confirm(name + " ಅವರ Request ತಿರಸ್ಕರಿಸಬೇಕೇ?")) return;
+
+  item.remove();
+
+  let savedRequests = JSON.parse(
+    localStorage.getItem("friendRequests") || "[]"
+  );
+
+  savedRequests = savedRequests.filter(
+    friend => friend !== name
+  );
+
+  localStorage.setItem(
+    "friendRequests",
+    JSON.stringify(savedRequests)
+  );
+
+  alert("Request ತಿರಸ್ಕರಿಸಲಾಗಿದೆ!");
+}
+function acceptRequest(button) {
+  const request = button.closest(".post") || button.closest("p");
+  if (!request) return;
+
+  const heading = request.querySelector("h3");
+  const name = heading
+    ? heading.innerText.replace("😊 ", "").trim()
+    : request.childNodes[0].textContent.replace("👤", "").trim();
+
+  acceptedFriends++;
+  localStorage.setItem("acceptedFriends", acceptedFriends);
+
+  const friendsDiv = document.getElementById("myFriends");
+
+  const friend = document.createElement("p");
+  friend.innerHTML = "👤 " + name +
+    ' <button onclick="removeFriend(\'' + name + '\')">❌ Remove</button>';
+
+  friendsDiv.appendChild(friend);
+  request.remove();
+
+  document.getElementById("friendCount").innerText =
+    "👥 Friends: " + acceptedFriends;
+}
+let currentChatFriend = "";
+
+function openChat(name) {
+  currentChatFriend = name;
+
+  document.getElementById("chatTitle").innerText =
+    "💬 " + name + " ಜೊತೆ Chat";
+
+  renderChat();
+}
+
+function renderChat() {
+  let messages = JSON.parse(
+    localStorage.getItem("chat_" + currentChatFriend) || "[]"
+  );
+
+  let box = document.getElementById("chatMessages");
+  box.innerHTML = "";
+
+  messages.forEach(function(message, index) {
+    let msg = document.createElement("div");
+    let text = document.createElement("p");
+
+    text.innerText = "👤 AMEER: " + message;
+
+    let del = document.createElement("button");
+    del.innerText = "🗑️ Delete";
+
+    del.onclick = function() {
+      if (confirm("ಈ Message ಅಳಿಸಬೇಕೇ?")) {
+        messages.splice(index, 1);
+        localStorage.setItem(
+          "chat_" + currentChatFriend,
+          JSON.stringify(messages)
+        );
+        renderChat();
+      }
+    };
+
+    msg.appendChild(text);
+    msg.appendChild(del);
+    box.appendChild(msg);
+  });
+}
+
+function sendChat() {
+  let message = document.getElementById("chatInput").value;
+
+  if (currentChatFriend === "") {
+    alert("ಮೊದಲು Friend ಆಯ್ಕೆ ಮಾಡಿ!");
+    return;
+  }
+
+  if (message.trim() === "") {
+    alert("Message ಬರೆಯಿರಿ!");
+    return;
+  }
+
+  let messages = JSON.parse(
+    localStorage.getItem("chat_" + currentChatFriend) || "[]"
+  );
+
+  messages.push(message);
+
+  localStorage.setItem(
+    "chat_" + currentChatFriend,
+    JSON.stringify(messages)
+  );
+
+  document.getElementById("chatInput").value = "";
+  renderChat();
+}
+function saveProfile() {
+  let bio = document.getElementById("bio").value;
+  let file = document.getElementById("profilePhoto").files[0];
+
+  localStorage.setItem("myBio", bio);
+
+  if (!file) {
+    alert("ಮೊದಲು Photo ಆಯ್ಕೆ ಮಾಡಿ!");
+    return;
+  }
+
+  let reader = new FileReader();
+
+  reader.onload = function() {
+    localStorage.setItem("myPhoto", reader.result);
+    showSavedPhoto(reader.result);
+
+    document.getElementById("profileResult").innerText =
+      "❤️ Profile Saved Successfully!";
+  };
+
+  reader.readAsDataURL(file);
+}
+
+function showSavedPhoto(url) {
+  let oldPhoto = document.getElementById("savedPhoto");
+
+  if (oldPhoto) {
+    oldPhoto.remove();
+  }
+
+  let photo = document.createElement("img");
+  photo.id = "savedPhoto";
+  photo.src = url;
+  photo.style.width = "100px";
+  photo.style.height = "100px";
+  photo.style.objectFit = "cover";
+  photo.style.borderRadius = "50%";
+
+  document.getElementById("profileResult").before(photo);
+}
+function changeProfileName() {
+  let name = document.getElementById("newProfileName").value;
+
+  if (name.trim() === "") {
+    alert("ಹೊಸ ಹೆಸರು ಬರೆಯಿರಿ!");
+    return;
+  }
+
+  localStorage.setItem("myName", name);
+  document.getElementById("profileName").innerText = name;
+  document.getElementById("feedName").innerText = name;
+
+  alert("❤️ ಹೆಸರು ಬದಲಾಯಿಸಲಾಗಿದೆ!");
+}
+function editProfile() {
+  const name = prompt("ನಿಮ್ಮ ಹೊಸ ಹೆಸರನ್ನು ನಮೂದಿಸಿ:");
+
+  if (name && name.trim() !== "") {
+    document.getElementById("newProfileName").value = name.trim();
+    changeProfileName();
+  }
+}
+function logoutUser() {
+  if (confirm("ನೀವು Logout ಆಗಲು ಬಯಸುತ್ತೀರಾ?")) {
+    alert("ನೀವು Logout ಆಗಿದ್ದೀರಿ!");
+    location.reload();
+  }
+}
+window.onload = function() {
+  document.getElementById("bio").value =
+    localStorage.getItem("myBio") || "";
+
+  let savedPhoto = localStorage.getItem("myPhoto");
+
+  if (savedPhoto) {
+    showSavedPhoto(savedPhoto);
+  }
+let savedName = localStorage.getItem("myName");
+if (savedName) {
+  document.getElementById("profileName").innerText = savedName;
+  document.getElementById("feedName").innerText = savedName;
+}
+showComments();
+let savedRequests = JSON.parse(
+  localStorage.getItem("friendRequests") || "[]"
+);
+
+const requests = document.getElementById("friendRequests");
+requests.innerHTML = "";
+
+savedRequests.forEach(function(name) {
+  const item = document.createElement("p");
+  item.innerHTML = "👤 " + name +
+    ' <button onclick="acceptRequest(this)">✓ Accept</button>' +
+    ' <button onclick="rejectRequest(this)">❌ Reject</button>';
+
+  requests.appendChild(item);
+});
+}; // window.onload ಮುಕ್ತಾಯ
+function signupUser() {
+  let name = document.getElementById("newName").value;
+  let email = document.getElementById("newEmail").value;
+  let password = document.getElementById("newPassword").value;
+
+  if (name.trim() === "" || email.trim() === "" || password.trim() === "") {
+    alert("ಎಲ್ಲಾ ವಿವರಗಳನ್ನು ಭರ್ತಿ ಮಾಡಿ!");
+    return;
+  }
+
+  document.getElementById("signupResult").innerText =
+    "❤️ Welcome " + name + "! Signup ಪರೀಕ್ಷೆ ಯಶಸ್ವಿಯಾಗಿದೆ.";
+
+  alert("Signup ಯಶಸ್ವಿಯಾಗಿದೆ!");
+}
+let likes = Number(localStorage.getItem("myLikes")) || 0;
+document.getElementById("result").innerText = "Likes: " + likes;
+function loginUser() {
+  let name = document.getElementById("username").value;
+  let password = document.getElementById("password").value;
+
+  if (name.trim() === "" || password.trim() === "") {
+    alert("Name ಮತ್ತು Password ಹಾಕಿ!");
+    return;
+  }
+  alert("Welcome " + name + " ❤️ Login ಯಶಸ್ವಿಯಾಗಿದೆ!");
+}
+function likePost() {
+  likes++;
+
+  localStorage.setItem("myLikes", likes);
+
+  document.getElementById("result").innerText =
+    "Likes: " + likes;
+}
+function commentPost() {
+  let comment = prompt("ನಿಮ್ಮ Comment ಬರೆಯಿರಿ:");
+
+  if (!comment || comment.trim() === "") return;
+
+  let comments = JSON.parse(
+    localStorage.getItem("myComments") || "[]"
+  );
+
+  comments.push(comment);
+
+  localStorage.setItem("myComments", JSON.stringify(comments));
+
+  showComments();
+}
+function showComments() {
+  let comments = JSON.parse(
+    localStorage.getItem("myComments") || "[]"
+  );
+
+  let box = document.getElementById("commentsList");
+  box.innerHTML = "";
+
+  comments.forEach(function(comment, index) {
+    let p = document.createElement("p");
+    p.innerText = "💬 " + comment;
+
+    let btn = document.createElement("button");
+    btn.innerText = "🗑️ Delete";
+
+    btn.onclick = function() {
+      comments.splice(index, 1);
+
+      localStorage.setItem(
+        "myComments",
+        JSON.stringify(comments)
+      );
+
+      showComments();
+    };
+
+    box.appendChild(p);
+    box.appendChild(btn);
+  });
+}
+
+function publishPost() {
+  const file = document.getElementById("mediaFile").files[0];
+
+  if (!file) {
+    alert("ಮೊದಲು ಫೋಟೋ ಅಥವಾ ವಿಡಿಯೋ ಆಯ್ಕೆ ಮಾಡಿ!");
+    return;
+  }
+
+  const url = URL.createObjectURL(file);
+  const post = document.createElement("div");
+  post.className = "post";
+
+  const title = document.createElement("h3");
+  title.innerText = "👤 " + (localStorage.getItem("myName") || "AMEER");
+  post.appendChild(title);
+
+  if (file.type.startsWith("image/")) {
+    const img = document.createElement("img");
+    img.src = url;
+    img.style.width = "100%";
+    post.appendChild(img);
+  } else if (file.type.startsWith("video/")) {
+    const video = document.createElement("video");
+    video.src = url;
+    video.controls = true;
+    video.style.width = "100%";
+    post.appendChild(video);
+  }
+
+  const deleteBtn = document.createElement("button");
+  deleteBtn.innerText = "🗑️ Delete Post";
+  deleteBtn.onclick = function() {
+    if (confirm("ಈ ಪೋಸ್ಟ್ ಅಳಿಸಬೇಕೇ?")) {
+      post.remove();
+      URL.revokeObjectURL(url);
+    }
+  };
+  post.appendChild(deleteBtn);
+
+  const saveBtn = document.createElement("button");
+  saveBtn.innerText = "⭐ Save Post";
+  saveBtn.onclick = function() {
+    const reader = new FileReader();
+    reader.onload = function() {
+      let saved = JSON.parse(localStorage.getItem("savedPosts") || "[]");
+      saved.push({image: reader.result, type: file.type});
+      localStorage.setItem("savedPosts", JSON.stringify(saved));
+      alert("Post Saved Successfully! ❤️");
+    };
+    reader.readAsDataURL(file);
+  };
+  post.appendChild(saveBtn);
+
+  const shareBtn = document.createElement("button");
+  shareBtn.innerText = "📲 WhatsApp Share";
+  shareBtn.onclick = async function() {
+    try {
+      if (navigator.canShare && navigator.canShare({files: [file]})) {
+        await navigator.share({
+          files: [file],
+          title: "AMEER SOCIAL",
+          text: "ನನ್ನ ಹೊಸ ಪೋಸ್ಟ್ ನೋಡಿ! ❤️"
+        });
+      } else {
+        window.open("https://wa.me/?text=" +
+          encodeURIComponent("ನನ್ನ ಹೊಸ ಪೋಸ್ಟ್ ನೋಡಿ! ❤️"), "_blank");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  post.appendChild(shareBtn);
+
+  const downloadBtn = document.createElement("button");
+  downloadBtn.innerText = "📥 Download Post";
+  downloadBtn.onclick = function() {
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = file.name;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+  post.appendChild(downloadBtn);
+
+  document.querySelector("main").appendChild(post);
+  alert("Post ಯಶಸ್ವಿಯಾಗಿ ಸೇರಿಸಲಾಗಿದೆ! ❤️");
+}
+
+function showMedia() {
+  const file = document.getElementById("mediaFile").files[0];
+  const preview = document.getElementById("mediaPreview");
+
+  if (!file) return;
+
+  const url = URL.createObjectURL(file);
+
+  if (file.type.startsWith("image/")) {
+    preview.innerHTML = '<img src="' + url + '" width="100%">';
+  } else if (file.type.startsWith("video/")) {
+    preview.innerHTML = '<video src="' + url + '" width="100%" controls></video>';
+  }
+}
+function showNotifications() {
+  const list = document.getElementById("notificationList");
+
+  list.innerHTML = `
+    <div class="post">
+      <h3>🔔 Notifications</h3>
+      <p>❤️ ನಿಮ್ಮ ಪೋಸ್ಟ್‌ಗೆ Like ಬಂದಿದೆ!</p>
+      <p>💬 ನಿಮ್ಮ ಪೋಸ್ಟ್‌ಗೆ ಹೊಸ Comment ಬಂದಿದೆ!</p>
+      <p>👥 ಹೊಸ Friend Request ಬಂದಿದೆ!</p>
+    </div>
+  `;
+}
+function showSavedPosts() {
+  const savedPosts = JSON.parse(
+    localStorage.getItem("savedPosts") || "[]"
+  );
+
+  const list = document.getElementById("savedPostsList");
+  list.innerHTML = "";
+
+  if (savedPosts.length === 0) {
+    list.innerHTML = "<p>ಯಾವುದೇ Saved Posts ಇಲ್ಲ.</p>";
+    return;
+  }
+
+  savedPosts.forEach(function(post) {
+    const item = document.createElement("div");
+    item.className = "post";
+
+    if (post.type.startsWith("image/")) {
+      const img = document.createElement("img");
+      img.src = post.image;
+      img.style.width = "100%";
+      item.appendChild(img);
+    }
+const deleteBtn = document.createElement("button");
+deleteBtn.innerText = "🗑️ Delete";
+deleteBtn.onclick = function() {
+  if (confirm("ಈ Saved Post ಅಳಿಸಬೇಕೇ?")) {
+    const index = savedPosts.indexOf(post);
+    savedPosts.splice(index, 1);
+    localStorage.setItem("savedPosts", JSON.stringify(savedPosts));
+    showSavedPosts();
+  }
+};
+item.appendChild(deleteBtn);
+    list.appendChild(item);
+  });
+}
+</script>
+</body>
+</html>
